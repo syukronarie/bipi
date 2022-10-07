@@ -1,0 +1,37 @@
+{
+	"name": "bipi-svc",
+	"version": "1.0.0",
+	"description": "a barebone CRUD GraphQL backend",
+	"main": "src/index.js",
+	"type": "module",
+	"scripts": {
+		"start": "nodemon src/index.js --exec babel-node -e js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/syukronarie/bipi/tree/master/bipi-svc"
+	},
+	"keywords": [
+		"Nodejs",
+		"Expressjs",
+		"GraphQL",
+		"Knexjs",
+		"PostgreSQL"
+	],
+	"author": "M Arie Syukron <syukronarie@gmail.com>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/syukronarie/bipi/issues"
+	},
+	"homepage": "https://github.com/syukronarie/bipi#readme",
+	"devDependencies": {
+		"@babel/cli": "^7.19.3",
+		"@babel/core": "^7.19.3",
+		"@babel/node": "^7.19.1",
+		"@babel/preset-env": "^7.19.3",
+		"nodemon": "^2.0.20"
+	},
+	"dependencies": {
+		"express": "^4.18.1"
+	}
+}
