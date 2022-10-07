@@ -4,7 +4,6 @@
 	"description": "CRUD GraphQL",
 	"main": "src/index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
 		"commit": "cz"
 	},
 	"repository": {
@@ -24,5 +23,13 @@
 	"bugs": {
 		"url": "https://github.com/syukronarie/bipi/issues"
 	},
-	"homepage": "https://github.com/syukronarie/bipi#readme"
+	"homepage": "https://github.com/syukronarie/bipi#readme",
+	"devDependencies": {
+		"cz-conventional-changelog": "^3.3.0"
+	},
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
+	}
 }
