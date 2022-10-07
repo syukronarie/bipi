@@ -1,0 +1,28 @@
+{
+	"name": "bipi",
+	"version": "1.0.0",
+	"description": "CRUD GraphQL",
+	"main": "src/index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"commit": "cz"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/syukronarie/bipi.git"
+	},
+	"keywords": [
+		"Nodejs",
+		"Expressjs",
+		"GraphQL",
+		"Knexjs",
+		"PostgreSQL",
+		"Reactjs"
+	],
+	"author": "M Arie Syukron",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/syukronarie/bipi/issues"
+	},
+	"homepage": "https://github.com/syukronarie/bipi#readme"
+}
