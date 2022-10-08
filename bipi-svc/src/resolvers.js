@@ -4,6 +4,7 @@ import {
   getMerchantById,
   queryMerchants,
   updateMerchant,
+  toggleBulkIsActive,
 } from "./services/merchant.service";
 
 const resolvers = {
@@ -14,6 +15,10 @@ const resolvers = {
     },
     updateMerchant: async (_, { id, merchant }) => {
       const result = await updateMerchant(id, merchant);
+      return result;
+    },
+    toggleBulkIsActive: async (_, { isActive }) => {
+      const result = await toggleBulkIsActive(isActive);
       return result;
     },
   },

@@ -1,3 +1,4 @@
+import CONST from "../models/Constants";
 import MerchantRepository from "../repositories/merchant.repository";
 
 const merchantRepo = new MerchantRepository();
@@ -22,4 +23,16 @@ const updateMerchant = async (id, merchant) => {
   return result;
 };
 
-export { createMerchant, getMerchantById, queryMerchants, updateMerchant };
+const toggleBulkIsActive = async (isActive) => {
+  const result = await merchantRepo.batchUpdateIsActive(isActive);
+  if (result === CONST.SUCCESS) return CONST.SUCCESS;
+  return CONST.FALSE;
+};
+
+export {
+  createMerchant,
+  getMerchantById,
+  queryMerchants,
+  updateMerchant,
+  toggleBulkIsActive,
+};
