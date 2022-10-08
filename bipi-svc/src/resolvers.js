@@ -10,7 +10,6 @@ const resolvers = {
   Query: {
     allMerchant: async (_, { filterOptions }) => {
       const result = await queryMerchants(filterOptions);
-      console.log({ tes: result });
       return result;
     },
   },
