@@ -4,7 +4,8 @@
 	"description": "CRUD GraphQL",
 	"main": "src/index.js",
 	"scripts": {
-		"commit": "cz"
+		"commit": "cz",
+		"prepare": "husky install"
 	},
 	"repository": {
 		"type": "git",
@@ -25,7 +26,8 @@
 	},
 	"homepage": "https://github.com/syukronarie/bipi#readme",
 	"devDependencies": {
-		"cz-conventional-changelog": "^3.3.0"
+		"cz-conventional-changelog": "^3.3.0",
+		"husky": "^8.0.1"
 	},
 	"config": {
 		"commitizen": {
