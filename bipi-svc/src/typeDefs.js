@@ -58,7 +58,7 @@ const typeDefs = gql`
   type Mutation {
     createMerchant(merchant: InputMerchant!): Merchant!
     updateMerchant(id: Int!, merchant: InputUpdateMerchant!): Merchant!
-    # toggleBulkIsActive(isActive: Boolean!): [Merchant!]!
+    toggleBulkIsActive(isActive: Boolean!): String!
   }
 `;
 

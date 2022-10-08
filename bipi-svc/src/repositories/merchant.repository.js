@@ -2,6 +2,8 @@
 import httpStatus from "http-status";
 
 import db from "../config/db";
+import batchUpdate from "../middlewares/helpers/batchUpdate";
+import CONST from "../models/Constants";
 import TABLES from "../models/Tables";
 import ErrorMessage from "../utils/ErrorMessages";
 
@@ -67,14 +69,39 @@ class MerchantRepository {
   }
 
   async findById(id) {
-    const result = await db(TABLES.MERCHANTS).where({ id }).first();
-    return result;
+    try {
+      const result = await db(TABLES.MERCHANTS).where({ id }).first();
+      return result;
+    } catch (err) {
+      throw new Error(httpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
   async update(id, data) {
-    const ids = await db(TABLES.MERCHANTS).where({ id }).update(data, ["id"]);
-    data.id = ids[0].id;
-    return data;
+    try {
+      const ids = await db(TABLES.MERCHANTS).where({ id }).update(data, ["id"]);
+      data.id = ids[0].id;
+      return data;
+    } catch (err) {
+      throw new Error(httpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  async batchUpdateIsActive(isActive) {
+    try {
+      const collection = await db(TABLES.MERCHANTS).select("*");
+      collection.forEach((record) => {
+        record.isActive = isActive;
+      });
+      const result = await batchUpdate(
+        { db, table: TABLES.MERCHANTS },
+        collection
+      );
+      if (result === CONST.SUCCESS) return CONST.SUCCESS;
+      return CONST.FALSE;
+    } catch (err) {
+      throw new Error(httpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 }
 
