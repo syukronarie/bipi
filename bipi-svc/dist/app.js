@@ -11,17 +11,14 @@ var _cors = _interopRequireDefault(require("cors"));
 
 var _express = _interopRequireDefault(require("express"));
 
-var _httpStatus = _interopRequireDefault(require("http-status"));
-
 var _config = _interopRequireDefault(require("./config/config"));
 
 var _morgan = require("./config/morgan");
 
-var _ApiError = _interopRequireDefault(require("./utils/ApiError"));
-
 var _error = require("./middlewares/error");
 
-// eslint-disable-next-line prettier/prettier
+var _ErrorMessages = _interopRequireDefault(require("./utils/ErrorMessages"));
+
 var app = (0, _express["default"])();
 
 if (_config["default"].env !== "test") {
@@ -35,11 +32,11 @@ app.options("*", (0, _cors["default"])()); // send back a 404 error for any unkn
 
 app.use(function (req, res, next) {
   if (req.originalUrl !== "/graphql") {
-    next(new _ApiError["default"](_httpStatus["default"].NOT_FOUND, "Not found"));
+    next(new Error(_ErrorMessages["default"].NOT_FOUND));
   }
 
   next();
-}); // convert error to ApiError, if needed
+}); // convert error to Errow, if needed
 
 app.use(_error.errorConverter); // handle error
 

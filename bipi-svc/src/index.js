@@ -34,6 +34,7 @@ const server = new ApolloServer({
     ApolloServerPluginDrainHttpServer({ httpServer }),
     ApolloServerPluginLandingPageLocalDefault({ embed: true }),
   ],
+  introspection: true, // to allows introspection in production that used for example
 });
 
 // !this sintax to show list tables in postgreSQL, no need to enabled.

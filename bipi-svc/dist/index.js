@@ -46,7 +46,9 @@ var server = new _apolloServerExpress.ApolloServer({
     httpServer: httpServer
   }), (0, _apolloServerCore.ApolloServerPluginLandingPageLocalDefault)({
     embed: true
-  })]
+  })],
+  introspection: true // to allows introspection in production that used for example
+
 }); // !this sintax to show list tables in postgreSQL, no need to enabled.
 // db("pg_catalog.pg_tables").select("tablename").where({ schemaname: "public" });
 
