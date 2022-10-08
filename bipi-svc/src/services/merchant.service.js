@@ -12,4 +12,9 @@ const queryMerchants = async (filterOptions) => {
   return result;
 };
 
-export { createMerchant, queryMerchants };
+const getMerchantById = async (id) => {
+  const result = await merchantRepo.findById(id);
+  return result;
+};
+
+export { createMerchant, queryMerchants, getMerchantById };
