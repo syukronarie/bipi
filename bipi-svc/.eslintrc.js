@@ -28,6 +28,7 @@ module.exports = {
     ],
     "class-methods-use-this": "off",
     "security/detect-object-injection": "off",
+    "no-param-reassign": "off",
     "prettier/prettier": [
       "warn",
       {
