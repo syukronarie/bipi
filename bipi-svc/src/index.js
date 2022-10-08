@@ -36,6 +36,9 @@ const server = new ApolloServer({
   ],
 });
 
+// !this sintax to show list tables in postgreSQL, no need to enabled.
+// db("pg_catalog.pg_tables").select("tablename").where({ schemaname: "public" });
+
 db.raw("SELECT 1")
   .then(async () => {
     logger.info("PostgreSQL connected");

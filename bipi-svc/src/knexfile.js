@@ -1,6 +1,6 @@
 import config from "./config/config";
 
-const { host, database, user, password } = config.pg;
+const { host, database, user, password, port } = config.pg;
 
 const development = {
   client: "pg",
@@ -9,6 +9,7 @@ const development = {
     database,
     user,
     password,
+    port,
   },
 };
 
@@ -19,6 +20,7 @@ const production = {
     database,
     user,
     password,
+    port,
     ssl: { rejectUnauthorized: false },
   },
   pool: {
