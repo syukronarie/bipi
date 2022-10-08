@@ -23,7 +23,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install deps
-        run: npm ci
+        run: npm ci && npm ci --prefix bipi-svc
 
       - name: Run Linter
         run: npm run lint
