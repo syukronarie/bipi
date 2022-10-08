@@ -22,5 +22,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - name: Install deps
+        run: npm ci
+
       - name: Run Linter
         run: npm run lint
