@@ -1,5 +1,4 @@
 {
-  "version": 2,
   "installCommand": "npm ci",
   "devCommand": "npm run start",
   "outputDirectory": "dist"
