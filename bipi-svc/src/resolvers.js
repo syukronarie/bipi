@@ -1,4 +1,9 @@
-import { createMerchant, queryMerchants } from "./services/merchant.service";
+/* eslint-disable prettier/prettier */
+import {
+  createMerchant,
+  getMerchantById,
+  queryMerchants,
+} from "./services/merchant.service";
 
 const resolvers = {
   Mutation: {
@@ -8,6 +13,10 @@ const resolvers = {
     },
   },
   Query: {
+    getMerchant: async (_, { id }) => {
+      const result = await getMerchantById(id);
+      return result;
+    },
     allMerchant: async (_, { filterOptions }) => {
       const result = await queryMerchants(filterOptions);
       return result;

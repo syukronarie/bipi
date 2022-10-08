@@ -42,7 +42,7 @@ const typeDefs = gql`
 
   type Query {
     # searchMerchants(title: String!, page: Int, limit: Int, sortBy: SortBy): [Merchant!]!
-    # getMerchant(id: Int!): Merchant
+    getMerchant(id: Int!): Merchant
     allMerchant(filterOptions: InputFilterOptions): AllMerchant!
   }
 

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import httpStatus from "http-status";
 
 import db from "../config/db";
@@ -63,6 +64,11 @@ class MerchantRepository {
     } catch (err) {
       throw new Error(httpStatus.INTERNAL_SERVER_ERROR);
     }
+  }
+
+  async findById(id) {
+    const result = await db(TABLES.MERCHANTS).where({ id }).first();
+    return result;
   }
 }
 
