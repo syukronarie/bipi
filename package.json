@@ -5,7 +5,8 @@
 	"main": "src/index.js",
 	"scripts": {
 		"commit": "cz",
-		"prepare": "husky install"
+		"prepare": "husky install",
+		"lint": "concurrently -k \"npm run lint --prefix bipi-svc\""
 	},
 	"repository": {
 		"type": "git",
@@ -33,5 +34,8 @@
 		"commitizen": {
 			"path": "./node_modules/cz-conventional-changelog"
 		}
+	},
+	"dependencies": {
+		"concurrently": "^7.4.0"
 	}
 }
