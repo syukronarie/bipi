@@ -17,4 +17,9 @@ const getMerchantById = async (id) => {
   return result;
 };
 
-export { createMerchant, queryMerchants, getMerchantById };
+const updateMerchant = async (id, merchant) => {
+  const result = await merchantRepo.update(id, merchant);
+  return result;
+};
+
+export { createMerchant, getMerchantById, queryMerchants, updateMerchant };

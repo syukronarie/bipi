@@ -34,6 +34,15 @@ const typeDefs = gql`
     recordedDateTime: DateTime!
   }
 
+  input InputUpdateMerchant {
+    merchantName: String!
+    phoneNumber: String!
+    latitude: Float!
+    longitude: Float!
+    isActive: Boolean!
+    recordedDateTime: DateTime!
+  }
+
   input InputFilterOptions {
     page: Int = 1
     limit: Int = 10
@@ -48,7 +57,7 @@ const typeDefs = gql`
 
   type Mutation {
     createMerchant(merchant: InputMerchant!): Merchant!
-    # updateMerchant(merchant: InputMerchant!): Merchant!
+    updateMerchant(id: Int!, merchant: InputUpdateMerchant!): Merchant!
     # toggleBulkIsActive(isActive: Boolean!): [Merchant!]!
   }
 `;
