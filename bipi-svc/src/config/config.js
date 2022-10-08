@@ -14,6 +14,7 @@ const envVarsSchema = Joi.object()
     PG_DATABASE: Joi.string().required().description("Postgress Database"),
     PG_USER: Joi.string().required().description("Postgress Username"),
     PG_PASSWORD: Joi.string().required().description("Postgress Password"),
+    PG_PORT: Joi.string().required().description("Postgress Port"),
   })
   .unknown();
 
@@ -33,6 +34,7 @@ const config = {
     database: envVars.PG_DATABASE,
     user: envVars.PG_USER,
     password: envVars.PG_PASSWORD,
+    port: envVars.PG_PORT,
   },
 };
 
