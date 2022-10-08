@@ -70,6 +70,12 @@ class MerchantRepository {
     const result = await db(TABLES.MERCHANTS).where({ id }).first();
     return result;
   }
+
+  async update(id, data) {
+    const ids = await db(TABLES.MERCHANTS).where({ id }).update(data, ["id"]);
+    data.id = ids[0].id;
+    return data;
+  }
 }
 
 export default MerchantRepository;

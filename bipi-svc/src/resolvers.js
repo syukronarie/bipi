@@ -3,12 +3,17 @@ import {
   createMerchant,
   getMerchantById,
   queryMerchants,
+  updateMerchant,
 } from "./services/merchant.service";
 
 const resolvers = {
   Mutation: {
     createMerchant: async (_, { merchant }) => {
       const result = await createMerchant(merchant);
+      return result;
+    },
+    updateMerchant: async (_, { id, merchant }) => {
+      const result = await updateMerchant(id, merchant);
       return result;
     },
   },
