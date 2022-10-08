@@ -1,5 +1,13 @@
 {
   "version": 2,
-  "builds": [{ "src": "dist/index.js", "use": "@vercel/node" }],
-  "routes": [{ "src": "/graphql", "methods": ["POST"], "dest": "/graphql" }]
+  "builds": [
+    {
+      "src": "public/dist/index.js",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["public/dist/"]
+      }
+    }
+  ],
+  "routes": [{ "src": "/(.*)", "dest": "public/dist/index.js" }]
 }
