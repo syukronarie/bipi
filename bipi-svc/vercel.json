@@ -1,5 +1,5 @@
 {
-  "installCommand": "npm ci",
-  "devCommand": "npm run start",
-  "outputDirectory": "dist"
+  "version": 2,
+  "builds": [{ "src": "dist/index.js", "use": "@vercel/node" }],
+  "routes": [{ "src": "/graphql", "methods": ["POST"], "dest": "/graphql" }]
 }
