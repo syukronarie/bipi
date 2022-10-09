@@ -1,12 +1,12 @@
 {
-	"singleQuote": false,
-	"tabWidth": 2,
-	"bracketSpacing": true,
-	"trailingComma": "es5",
-	"printWidth": 80,
-	"overrides": [
-		{
-			"files": ".prettierrc"
-		}
-	]
+  "singleQuote": false,
+  "tabWidth": 2,
+  "bracketSpacing": true,
+  "trailingComma": "es5",
+  "printWidth": 100,
+  "overrides": [
+    {
+      "files": ".prettierrc"
+    }
+  ]
 }

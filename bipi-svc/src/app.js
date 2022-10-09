@@ -3,10 +3,7 @@ import express from "express";
 
 import config from "./config/config";
 import { successHandler, errorHandler } from "./config/morgan";
-import {
-  errorConverter,
-  errorHandler as midErrorHandler,
-} from "./middlewares/error";
+import { errorConverter, errorHandler as midErrorHandler } from "./middlewares/error";
 import ErrorMessage from "./utils/ErrorMessages";
 
 const app = express();

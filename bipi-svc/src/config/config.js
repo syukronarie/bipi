@@ -6,9 +6,7 @@ dotenv.config({ path: path.join(__dirname, "../../.env") });
 
 const envVarsSchema = Joi.object()
   .keys({
-    NODE_ENV: Joi.string()
-      .valid("production", "development", "test")
-      .required(),
+    NODE_ENV: Joi.string().valid("production", "development", "test").required(),
     PORT: Joi.number().default(8080),
     PG_HOST: Joi.string().required().description("Postgress Host"),
     PG_DATABASE: Joi.string().required().description("Postgress Database"),
