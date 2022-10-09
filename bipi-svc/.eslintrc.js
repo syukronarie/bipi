@@ -3,13 +3,7 @@ module.exports = {
     node: true,
     jest: true,
   },
-  extends: [
-    "airbnb-base",
-    "plugin:jest/recommended",
-    "plugin:security/recommended",
-    "plugin:prettier/recommended",
-    "prettier",
-  ],
+  extends: ["airbnb-base", "plugin:jest/recommended", "plugin:security/recommended", "plugin:prettier/recommended", "prettier"],
   plugins: ["jest", "security", "prettier"],
   parserOptions: {
     ecmaVersion: 2018,
@@ -29,12 +23,6 @@ module.exports = {
     "class-methods-use-this": "off",
     "security/detect-object-injection": "off",
     "no-param-reassign": "off",
-    "prettier/prettier": [
-      "warn",
-      {
-        endOfLine: "auto",
-        singleQuote: false,
-      },
-    ],
+    "prettier/prettier": "off",
   },
 };

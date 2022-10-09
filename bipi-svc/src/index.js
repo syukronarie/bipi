@@ -1,14 +1,6 @@
 import { ApolloServer } from "apollo-server-express";
-import {
-  ApolloServerPluginDrainHttpServer,
-  ApolloServerPluginLandingPageLocalDefault,
-} from "apollo-server-core";
-import {
-  typeDefs as scalarTypeDefs,
-  resolvers as scalarResolvers,
-  DateTimeResolver,
-  DateTimeTypeDefinition,
-} from "graphql-scalars";
+import { ApolloServerPluginDrainHttpServer, ApolloServerPluginLandingPageLocalDefault } from "apollo-server-core";
+import { typeDefs as scalarTypeDefs, resolvers as scalarResolvers, DateTimeResolver, DateTimeTypeDefinition } from "graphql-scalars";
 import { makeExecutableSchema } from "@graphql-tools/schema";
 import http from "http";
 
@@ -30,10 +22,7 @@ const server = new ApolloServer({
   schema,
   csrfPrevention: true,
   cache: "bounded",
-  plugins: [
-    ApolloServerPluginDrainHttpServer({ httpServer }),
-    ApolloServerPluginLandingPageLocalDefault({ embed: true }),
-  ],
+  plugins: [ApolloServerPluginDrainHttpServer({ httpServer }), ApolloServerPluginLandingPageLocalDefault({ embed: true })],
   introspection: true, // to allows introspection in production that used for example
 });
 
@@ -49,11 +38,7 @@ db.raw("SELECT 1")
       // eslint-disable-next-line func-names
       httpServer.listen(config.port, function () {
         logger.info("We are in %s mode", app.settings.env);
-        logger.info(
-          "Server listening on http://localhost:%d%s",
-          this.address().port,
-          server.graphqlPath
-        );
+        logger.info("Server listening on http://localhost:%d%s", this.address().port, server.graphqlPath);
         resolve();
       });
     });
