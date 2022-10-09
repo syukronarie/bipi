@@ -13,7 +13,11 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 
 var _merchant = require("./services/merchant.service");
 
-/* eslint-disable prettier/prettier */
+var FILTER_OPTIONS = {
+  page: 1,
+  limit: 10,
+  sortBy: "ASC"
+};
 var resolvers = {
   Mutation: {
     createMerchant: function () {
@@ -136,20 +140,23 @@ var resolvers = {
     }(),
     allMerchant: function () {
       var _allMerchant = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(_, _ref5) {
-        var filterOptions, result;
+        var allMerchantfilterOptions, result;
         return _regenerator["default"].wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
-                filterOptions = _ref5.filterOptions;
-                _context5.next = 3;
-                return (0, _merchant.queryMerchants)(filterOptions);
+                allMerchantfilterOptions = _ref5.allMerchantfilterOptions;
+                // this if condition should be exist to prevent error respond
+                // when client send with no args `allMerchantfilterOptions`
+                if (!allMerchantfilterOptions) allMerchantfilterOptions = FILTER_OPTIONS;
+                _context5.next = 4;
+                return (0, _merchant.queryMerchants)(allMerchantfilterOptions);
 
-              case 3:
+              case 4:
                 result = _context5.sent;
                 return _context5.abrupt("return", result);
 
-              case 5:
+              case 6:
               case "end":
                 return _context5.stop();
             }
@@ -162,6 +169,35 @@ var resolvers = {
       }
 
       return allMerchant;
+    }(),
+    searchMerchants: function () {
+      var _searchMerchants2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(_, _ref6) {
+        var searchFilterOptions, result;
+        return _regenerator["default"].wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                searchFilterOptions = _ref6.searchFilterOptions;
+                _context6.next = 3;
+                return (0, _merchant.searchMerchants)(searchFilterOptions);
+
+              case 3:
+                result = _context6.sent;
+                return _context6.abrupt("return", result);
+
+              case 5:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6);
+      }));
+
+      function searchMerchants(_x11, _x12) {
+        return _searchMerchants2.apply(this, arguments);
+      }
+
+      return searchMerchants;
     }()
   }
 };
