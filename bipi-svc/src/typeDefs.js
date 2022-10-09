@@ -74,14 +74,20 @@ const typeDefs = gql`
     code: String!
     success: Boolean!
     message: String!
-    merchants: [Merchant]
+    merchant: Merchant
   }
 
   type UpdateMerchantMutationResponse implements MutationResponse {
     code: String!
     success: Boolean!
     message: String!
-    merchants: [Merchant]
+    merchant: Merchant
+  }
+
+  type ToggleBulkIsActiveMutationResponse implements MutationResponse {
+    code: String!
+    success: Boolean!
+    message: String!
   }
 
   type Query {
@@ -93,7 +99,7 @@ const typeDefs = gql`
   type Mutation {
     createMerchant(merchant: InputMerchant!): CreateMerchantMutationResponse!
     updateMerchant(id: Int!, merchant: InputUpdateMerchant!): UpdateMerchantMutationResponse!
-    toggleBulkIsActive(isActive: Boolean!): String!
+    toggleBulkIsActive(isActive: Boolean!): ToggleBulkIsActiveMutationResponse!
   }
 `;
 

@@ -1,10 +1,37 @@
+import httpStatus from "http-status";
 import CONST from "../models/Constants";
 import MerchantRepository from "../repositories/merchant.repository";
+import createMutateResponse from "../utils/createMutateResponse";
 
 const merchantRepo = new MerchantRepository();
 
 const createMerchant = async (data) => {
-  const result = await merchantRepo.create(data);
+  const createResult = await merchantRepo.create(data);
+  if (createResult.success !== CONST.SUCCESS) {
+    const result = createMutateResponse(
+      httpStatus.INTERNAL_SERVER_ERROR,
+      CONST.INTERNAL_SERVER_ERROR
+    );
+    return result;
+  }
+  const result = createMutateResponse(httpStatus.CREATED, CONST.MERCHANT_SUCCESS_CREATED, {
+    merchant: createResult.data,
+  });
+  return result;
+};
+
+const updateMerchant = async (id, merchant) => {
+  const updateResult = await merchantRepo.update(id, merchant);
+  if (updateResult.success !== CONST.SUCCESS) {
+    const result = createMutateResponse(
+      httpStatus.INTERNAL_SERVER_ERROR,
+      CONST.INTERNAL_SERVER_ERROR
+    );
+    return result;
+  }
+  const result = createMutateResponse(httpStatus.OK, CONST.MERCHANT_SUCCESS_UPDATED, {
+    merchant: updateResult.data,
+  });
   return result;
 };
 
@@ -18,15 +45,17 @@ const getMerchantById = async (id) => {
   return result;
 };
 
-const updateMerchant = async (id, merchant) => {
-  const result = await merchantRepo.update(id, merchant);
-  return result;
-};
-
 const toggleBulkIsActive = async (isActive) => {
-  const result = await merchantRepo.batchUpdateIsActive(isActive);
-  if (result === CONST.SUCCESS) return CONST.SUCCESS;
-  return CONST.FALSE;
+  const toggleResult = await merchantRepo.batchUpdateIsActive(isActive);
+  if (toggleResult !== CONST.SUCCESS) {
+    const result = createMutateResponse(
+      httpStatus.INTERNAL_SERVER_ERROR,
+      CONST.INTERNAL_SERVER_ERROR
+    );
+    return result;
+  }
+  const result = createMutateResponse(httpStatus.OK, `${CONST.BULK_IS_ACTIVE_SUCCESS(isActive)}`);
+  return result;
 };
 
 const searchMerchants = async (searchFilterOptions) => {
