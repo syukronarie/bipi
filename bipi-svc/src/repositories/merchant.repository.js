@@ -30,11 +30,27 @@ class MerchantRepository {
   async create(data) {
     if (data.isActive === null) throw Error(ErrorMessage.INPUT_IS_ACTIVE_IS_BOOLEAN);
     try {
+      const result = {};
       const ids = await db(TABLES.MERCHANTS).insert(data, ["id"]);
       data.id = ids[0].id;
-      return data;
+      result.data = data;
+      result.success = CONST.SUCCESS;
+      return result;
     } catch (err) {
       throw new Error(ErrorMessage.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  async update(id, data) {
+    try {
+      const result = {};
+      const ids = await db(TABLES.MERCHANTS).where({ id }).update(data, ["id"]);
+      data.id = ids[0].id;
+      result.data = data;
+      result.success = CONST.SUCCESS;
+      return result;
+    } catch (err) {
+      throw new Error(httpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -59,16 +75,6 @@ class MerchantRepository {
     try {
       const result = await db(TABLES.MERCHANTS).where({ id }).first();
       return result;
-    } catch (err) {
-      throw new Error(httpStatus.INTERNAL_SERVER_ERROR);
-    }
-  }
-
-  async update(id, data) {
-    try {
-      const ids = await db(TABLES.MERCHANTS).where({ id }).update(data, ["id"]);
-      data.id = ids[0].id;
-      return data;
     } catch (err) {
       throw new Error(httpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -105,7 +111,6 @@ class MerchantRepository {
       const result = parseRawAllMerchants(filtered, filtered.length, page, limit, offset);
       return result;
     } catch (err) {
-      console.log({ err });
       throw new Error(httpStatus.INTERNAL_SERVER_ERROR);
     }
   }
