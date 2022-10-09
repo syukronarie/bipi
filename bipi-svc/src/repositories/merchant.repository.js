@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import httpStatus from "http-status";
 
 import db from "../config/db";
@@ -29,8 +28,7 @@ function parseRawAllMerchants(merchants, count, page, limit, offset) {
 
 class MerchantRepository {
   async create(data) {
-    if (data.isActive === null)
-      throw Error(ErrorMessage.INPUT_IS_ACTIVE_IS_BOOLEAN);
+    if (data.isActive === null) throw Error(ErrorMessage.INPUT_IS_ACTIVE_IS_BOOLEAN);
     try {
       const ids = await db(TABLES.MERCHANTS).insert(data, ["id"]);
       data.id = ids[0].id;
@@ -46,22 +44,11 @@ class MerchantRepository {
     if (page < 1) page = 1;
     const offset = (page - 1) * limit;
     try {
-      const query = db(TABLES.MERCHANTS)
-        .select("*")
-        .limit(limit)
-        .offset(offset);
+      const query = db(TABLES.MERCHANTS).select("*").limit(limit).offset(offset);
       if (sortBy) query.orderBy("merchantName", sortBy);
       const merchants = await query.then((res) => res);
-      const { count } = await db(TABLES.MERCHANTS)
-        .count({ count: "*" })
-        .first();
-      const result = parseRawAllMerchants(
-        merchants,
-        count,
-        page,
-        limit,
-        offset
-      );
+      const { count } = await db(TABLES.MERCHANTS).count({ count: "*" }).first();
+      const result = parseRawAllMerchants(merchants, count, page, limit, offset);
       return result;
     } catch (err) {
       throw new Error(httpStatus.INTERNAL_SERVER_ERROR);
@@ -93,13 +80,32 @@ class MerchantRepository {
       collection.forEach((record) => {
         record.isActive = isActive;
       });
-      const result = await batchUpdate(
-        { db, table: TABLES.MERCHANTS },
-        collection
-      );
+      const result = await batchUpdate({ db, table: TABLES.MERCHANTS }, collection);
       if (result === CONST.SUCCESS) return CONST.SUCCESS;
       return CONST.FALSE;
     } catch (err) {
+      throw new Error(httpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  async searchMerchantContainTitle(searchFilterOptions) {
+    const { sortBy, limit, title } = searchFilterOptions;
+    let { page } = searchFilterOptions;
+    if (page < 1) page = 1;
+    const offset = (page - 1) * limit;
+    try {
+      const query = db(TABLES.MERCHANTS).select("*").limit(limit).offset(offset);
+      if (sortBy) query.orderBy("merchantName", sortBy);
+      const merchants = await query.then((res) => res);
+      const filtered = merchants.filter((merchant) => {
+        const merchantName = merchant.merchantName.toLowerCase();
+        if (merchantName.includes(title.toLowerCase())) return merchant;
+        return null;
+      });
+      const result = parseRawAllMerchants(filtered, filtered.length, page, limit, offset);
+      return result;
+    } catch (err) {
+      console.log({ err });
       throw new Error(httpStatus.INTERNAL_SERVER_ERROR);
     }
   }

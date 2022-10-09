@@ -29,10 +29,16 @@ const toggleBulkIsActive = async (isActive) => {
   return CONST.FALSE;
 };
 
+const searchMerchants = async (searchFilterOptions) => {
+  const result = await merchantRepo.searchMerchantContainTitle(searchFilterOptions);
+  return result;
+};
+
 export {
   createMerchant,
   getMerchantById,
   queryMerchants,
   updateMerchant,
   toggleBulkIsActive,
+  searchMerchants,
 };
