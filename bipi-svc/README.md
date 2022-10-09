@@ -21,7 +21,7 @@ This is a project barebone CRUD GraphQL backend, the URS here [#1](https://githu
 
 * Clean separation between model, service, repo, resolver, and typedef
 * HTTP handler is really convenient since it uses `GraphQL`
-* Using [`Airbnb](https://github.com/airbnb/javascript) code convention (style guide)
+* Using [Airbnb](https://github.com/airbnb/javascript) code convention (style guide)
 * Extensible
 * Minimal dependencies
 * No ORM, instead using query builder `Knexjs` (keep it simple)
