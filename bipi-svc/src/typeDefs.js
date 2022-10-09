@@ -6,23 +6,31 @@ const typeDefs = gql`
     DESC
   }
 
-  type Merchant {
-    id: Int!
-    merchantName: String!
-    phoneNumber: String!
-    latitude: Float!
-    longitude: Float!
-    isActive: Boolean!
-    recordedDateTime: DateTime!
+  interface MutationResponse {
+    code: String!
+    success: Boolean!
+    message: String!
   }
 
-  type AllMerchant {
-    merchants: [Merchant]
+  interface SearchResponse {
     total: Int!
     lastPage: Int!
     currentPage: Int!
     limit: Int!
     offset: Int!
+  }
+
+  input AllMerchantFilterOptions {
+    page: Int = 1
+    limit: Int = 10
+    sortBy: SortBy = ASC
+  }
+
+  input SearchMerchantFilterOptions {
+    page: Int = 1
+    limit: Int = 10
+    sortBy: SortBy = ASC
+    title: String!
   }
 
   input InputMerchant {
@@ -43,21 +51,48 @@ const typeDefs = gql`
     recordedDateTime: DateTime!
   }
 
-  input InputFilterOptions {
-    page: Int = 1
-    limit: Int = 10
-    sortBy: SortBy = ASC
+  type Merchant {
+    id: Int!
+    merchantName: String!
+    phoneNumber: String!
+    latitude: Float!
+    longitude: Float!
+    isActive: Boolean!
+    recordedDateTime: DateTime!
+  }
+
+  type MerchantsQueryResponse implements SearchResponse {
+    total: Int!
+    lastPage: Int!
+    currentPage: Int!
+    limit: Int!
+    offset: Int!
+    merchants: [Merchant]
+  }
+
+  type CreateMerchantMutationResponse implements MutationResponse {
+    code: String!
+    success: Boolean!
+    message: String!
+    merchants: [Merchant]
+  }
+
+  type UpdateMerchantMutationResponse implements MutationResponse {
+    code: String!
+    success: Boolean!
+    message: String!
+    merchants: [Merchant]
   }
 
   type Query {
-    # searchMerchants(title: String!, page: Int, limit: Int, sortBy: SortBy): [Merchant!]!
+    searchMerchants(searchFilterOptions: SearchMerchantFilterOptions!): MerchantsQueryResponse!
     getMerchant(id: Int!): Merchant
-    allMerchant(filterOptions: InputFilterOptions): AllMerchant!
+    allMerchant(allMerchantfilterOptions: AllMerchantFilterOptions): MerchantsQueryResponse!
   }
 
   type Mutation {
-    createMerchant(merchant: InputMerchant!): Merchant!
-    updateMerchant(id: Int!, merchant: InputUpdateMerchant!): Merchant!
+    createMerchant(merchant: InputMerchant!): CreateMerchantMutationResponse!
+    updateMerchant(id: Int!, merchant: InputUpdateMerchant!): UpdateMerchantMutationResponse!
     toggleBulkIsActive(isActive: Boolean!): String!
   }
 `;
