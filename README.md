@@ -17,11 +17,13 @@
 
 This is a project barebone CRUD GraphQL backend, the URS here [#1](https://github.com/syukronarie/bipi/issues/1) that the project has already met all the functionality requirements and has one enhancement in [#35](https://github.com/syukronarie/bipi/issues/33).
 
+See the [Backend project](https://github.com/syukronarie/bipi/tree/master/bipi-svc) 
+
 ## Features
 
 * Clean separation between model, service, repo, resolver, and typedef
 * HTTP handler is really convenient since it uses `GraphQL`
-* Using [`Airbnb](https://github.com/airbnb/javascript) code convention (style guide)
+* Using [Airbnb](https://github.com/airbnb/javascript) code convention (style guide)
 * Extensible
 * Minimal dependencies
 * No ORM, instead using query builder `Knexjs` (keep it simple)
